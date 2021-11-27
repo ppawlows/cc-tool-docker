@@ -3,16 +3,6 @@ name: Build
 on: [push]
 
 jobs:
-  build_x86:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Download Turbo Bob
-      run: curl --fail --location --output bob https://dl.bintray.com/function61/dl/turbobob/20200617_1743_510a0529/bob_linux-amd64 && chmod +x bob
-    - name: Build with Turbo Bob
-      run: CI_REVISION_ID="$GITHUB_SHA" ./bob build --publish-artefacts
-      env:
-        DOCKER_CREDS: ${{ secrets.DOCKER_CREDS }}
   build_arm:
     runs-on: ubuntu-latest
     steps:
@@ -37,8 +27,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
+          platforms: linux/amd64,linux/arm64/v8,linux/arm/v7
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
