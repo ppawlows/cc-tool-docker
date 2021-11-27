@@ -21,13 +21,13 @@ CMD ["--help"]
 # we wouldn't need this if we used the builder image directly, but maybe this is better than shipping
 # the build toolchain.. we could also just install libboost-all-dev but that seems to install compilers etc.
 COPY --from=builder [ \
-	"/usr/lib/x86_64-linux-gnu/libboost_regex.so.*", \
-	"/usr/lib/x86_64-linux-gnu/libboost_filesystem.so.*", \
-	"/usr/lib/x86_64-linux-gnu/libboost_program_options.so.*", \
-	"/usr/lib/x86_64-linux-gnu/libicui18n.so.*", \
-	"/usr/lib/x86_64-linux-gnu/libicuuc.so.*", \
-	"/usr/lib/x86_64-linux-gnu/libicudata.so.*", \
-	"/usr/lib/x86_64-linux-gnu/libusb-1.0.so.*", \
-	"/usr/lib/x86_64-linux-gnu/"]
+	"/usr/lib/*-linux-gnu/libboost_regex.so.*", \
+	"/usr/lib/*-linux-gnu/libboost_filesystem.so.*", \
+	"/usr/lib/*-linux-gnu/libboost_program_options.so.*", \
+	"/usr/lib/*-linux-gnu/libicui18n.so.*", \
+	"/usr/lib/*-linux-gnu/libicuuc.so.*", \
+	"/usr/lib/*-linux-gnu/libicudata.so.*", \
+	"/usr/lib/*-linux-gnu/libusb-1.0.so.*", \
+	"/usr/lib/*-linux-gnu/"]
 
 COPY --from=builder /cc-tool/cc-tool /bin/cc-tool
